@@ -1,0 +1,50 @@
+﻿@model Employees
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Dodaj nowego pracownika</h1>
+<form asp-controller="Employees" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Name">Imię</label>
+        <input class="form-control" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Surname">Nazwisko</label>
+        <input class="form-control" asp-for="Surname" />
+        <span class="text-danger" asp-validation-for="Surname"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Pesel">Pesel</label>
+        <input class="form-control" asp-for="Pesel" />
+        <span class="text-danger" asp-validation-for="Pesel"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Stanowisko">Stanowisko</label>
+        <input class="form-control" asp-for="Stanowisko" />
+        <span class="text-danger" asp-validation-for="Stanowisko"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Department">Oddział</label>
+        <input class="form-control" asp-for="Department" />
+        <span class="text-danger" asp-validation-for="Department"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Hire">Data zatrudnienia</label>
+        <input class="form-control" asp-for="Hire" />
+        <span class="text-danger" asp-validation-for="Hire"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Hire">Data zwolnienia(opcjonalnie)</label>
+        <input class="form-control" asp-for="Fire" />
+        <span class="text-danger" asp-validation-for="Fire"></span>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Utwórz</button>
+    </div>
+
+
+</form>
