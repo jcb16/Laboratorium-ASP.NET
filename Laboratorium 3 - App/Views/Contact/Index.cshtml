@@ -1,4 +1,4 @@
-﻿@model Dictionary<int, Contact>
+﻿@model List<Contact>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -13,10 +13,13 @@
         <thead>
             <tr>
                 <th>
-                    Imię
+                    @Html.DisplayNameFor(a => a[0].Name)
                 </th>
                 <th>
-                    Email
+                    @Html.DisplayNameFor(a => a[0].Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(a => a[0].Priority)
                 </th>
                 <th>
                     Akcje
@@ -27,16 +30,19 @@
             @foreach (var item in @Model)
             {
                 <tr>
-                    <td class= @(item.Value.Name.EndsWith("a") ? "text-primary":"text-secondary")>
-                        @item.Value.Name
+                    <td class= @(item.Name.EndsWith("a") ? "text-primary":"text-secondary")>
+                        @item.Name
                     </td>
                     <td>
-                        @item.Value.Email
+                        @item.Email
                     </td>
                     <td>
-                        <a class="btn btn-outline-success" asp-action="Update" asp-route-id=@item.Key>Edycja</a>
-                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id=@item.Key>Szczegóły</a>
-                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@item.Key>Usuń</a>
+                        @item.Priority.GetDisplayName()
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-action="Update" asp-route-id=@item.ID>Edycja</a>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id=@item.ID>Szczegóły</a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@item.ID>Usuń</a>
                     </td>
                 </tr>
             }
