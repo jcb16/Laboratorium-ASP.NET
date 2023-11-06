@@ -6,7 +6,7 @@ namespace Laboratorium_3___App.Controllers
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
-
+        
         public ContactController(IContactService contactService)
         {
             _contactService = contactService;

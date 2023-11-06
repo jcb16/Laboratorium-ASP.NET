@@ -1,4 +1,7 @@
 using Laboratorium_3___App.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Laboratorium_3___App
 {
@@ -10,6 +13,7 @@ namespace Laboratorium_3___App
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddSingleton<IContactService, MemoryContactService>();
             var app = builder.Build();
 
