@@ -7,4 +7,8 @@
     <RootNamespace>Laboratorium_3___App</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+
 </Project>

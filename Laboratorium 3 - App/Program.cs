@@ -2,6 +2,7 @@ using Laboratorium_3___App.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using Data;
 
 namespace Laboratorium_3___App
 {
@@ -13,8 +14,11 @@ namespace Laboratorium_3___App
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<AppDbContext>(); //zaci¹gniecie bazy
+            
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
-            builder.Services.AddSingleton<IContactService, MemoryContactService>();
+            builder.Services.AddTransient<IContactService, EFContactService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
