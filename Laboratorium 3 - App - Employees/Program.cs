@@ -1,4 +1,6 @@
+using DataEmployees;
 using Laboratorium_3___App___Employees.Models;
+using System.Xml.Linq;
 
 namespace Laboratorium_3___App___Employees
 {
@@ -11,10 +13,12 @@ namespace Laboratorium_3___App___Employees
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddSingleton<IEmployeesService, MemoryEmployeesService>();
+            //builder.Services.AddSingleton<IEmployeesService, MemoryEmployeesService>();
 
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
+            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddTransient<IEmployeesService, EFEmployeesService>();
 
             var app = builder.Build();
 

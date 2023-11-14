@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laboratorium 3 - App", "Lab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laboratorium 3 - App - Employees", "Laboratorium 3 - App - Employees\Laboratorium 3 - App - Employees.csproj", "{C96EC88D-9C2B-44CD-A855-E2AF07020A2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1A85D272-BBAB-4EA4-B5AF-84C9A2118895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{1A85D272-BBAB-4EA4-B5AF-84C9A2118895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEmployees", "DataEmployees\DataEmployees.csproj", "{3C13D362-CF07-45DB-88F3-CCCF1814CEBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1A85D272-BBAB-4EA4-B5AF-84C9A2118895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A85D272-BBAB-4EA4-B5AF-84C9A2118895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A85D272-BBAB-4EA4-B5AF-84C9A2118895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C13D362-CF07-45DB-88F3-CCCF1814CEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C13D362-CF07-45DB-88F3-CCCF1814CEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C13D362-CF07-45DB-88F3-CCCF1814CEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C13D362-CF07-45DB-88F3-CCCF1814CEBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

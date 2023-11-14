@@ -34,6 +34,8 @@ namespace Laboratorium_3___App___Employees.Models
         }
     }
 
+
+
     public class Employees
     {
         //imię, nazwisko, pesel, stanowisko, oddział, data zatrudnienia, data zwolnienia
@@ -56,7 +58,7 @@ namespace Laboratorium_3___App___Employees.Models
         public string Pesel { get; set; }
 
         [Required(ErrorMessage = "Musisz podać stanowisko!")]
-        [StringLength(maximumLength: 11, ErrorMessage = "Stanowisko zbyt długie, maksymalnie 50 znaków!")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Stanowisko zbyt długie, maksymalnie 50 znaków!")]
         [Display(Name = "Stanowisko:")]
         public string Stanowisko { get; set; }
 

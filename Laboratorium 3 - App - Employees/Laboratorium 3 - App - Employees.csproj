@@ -6,5 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Laboratorium_3___App___Employees</RootNamespace>
   </PropertyGroup>
-
+    
+	<ItemGroup>
+		<ProjectReference Include="..\DataEmployees\DataEmployees.csproj" />
+	</ItemGroup>
 </Project>
