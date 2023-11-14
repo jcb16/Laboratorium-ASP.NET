@@ -83,7 +83,6 @@ namespace Laboratorium_3___App.Controllers
         }
 
 
-
         [HttpPost]
         public IActionResult Details()
         {

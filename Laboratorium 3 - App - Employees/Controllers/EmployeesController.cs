@@ -6,11 +6,19 @@ namespace Laboratorium_3___App.Controllers
     public class EmployeesController : Controller
     {
         //lista pracowników
-        static Dictionary<int,Employees> _employees = new Dictionary<int,Employees>();
-        static int id = 1;
+        
+
+        private readonly IEmployeesService _employeesService;
+
+        public EmployeesController(IEmployeesService employeesService)
+        {
+            _employeesService = employeesService;
+        }
+
+
         public IActionResult Index()
         {
-            return View(_employees);
+            return View(_employeesService.FindAll());
         }
 
         [HttpGet]
@@ -20,23 +28,23 @@ namespace Laboratorium_3___App.Controllers
         }
 
 
+
         [HttpPost]
-        public IActionResult Create(Employees model) { 
-            if(ModelState.IsValid)
+        public IActionResult Create(Employees model)
+        {
+            if (ModelState.IsValid)
             {
-                // dodaj model do bazy lub kolekcji 
-                model.ID = id++;
-                _employees.Add(model.ID, model);
+                _employeesService.Add(model);
                 return RedirectToAction("Index");
             }
-            return View(); 
+            return View();
         }
 
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_employees[id]);
+            return View(_employeesService.FindByID(id));
         }
 
         [HttpPost]
@@ -44,7 +52,7 @@ namespace Laboratorium_3___App.Controllers
         {
             if(ModelState.IsValid)
             {
-                _employees[model.ID] = model;
+                _employeesService.Update(model);
                 return RedirectToAction("Index");
             }
             return View();
@@ -53,20 +61,26 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet] 
         public IActionResult Delete(int id)
         {
-            return View(_employees[id]);
+            return View(_employeesService.FindByID(id));
         }
 
         [HttpPost]
         public IActionResult Delete(Employees model)
         {
-            _employees.Remove(model.ID);
+            _employeesService.RemoveById(model.ID);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Details(int id) 
         {
-            return View(_employees[id]);
+            return View(_employeesService.FindByID(id));
+        }
+
+        [HttpPost]
+        public IActionResult Details()
+        {
+            return RedirectToAction("Index");
         }
     }
 }

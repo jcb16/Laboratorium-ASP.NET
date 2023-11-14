@@ -1,4 +1,5 @@
-﻿@model Dictionary<int, Employees>
+﻿@* @model Dictionary<int, Employees> *@
+    @model List<Employees>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -24,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in @Model)
+            @* @foreach (var item in @Model)
             {
                 <tr>
                     <td class= @(item.Value.Name.EndsWith("a") ? "text-primary":"text-secondary")>
@@ -39,7 +40,23 @@
                         <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@item.Key>Usuń</a>
                     </td>
                 </tr>
+            } *@
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td class=@(item.Name.EndsWith("a") ? "text-primary":"text-secondary")>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Surname
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-action="Update" asp-route-id=@item.ID>Edycja</a>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id=@item.ID>Szczegóły</a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@item.ID>Usuń</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
-}
+ }

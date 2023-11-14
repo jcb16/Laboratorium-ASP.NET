@@ -3,7 +3,7 @@
     public class MemoryContactService : IContactService
     {
         private readonly Dictionary<int,Contact> _items = new Dictionary<int, Contact>();
-        private int id = 1;
+        private int id = 0;
 
         public void Add(Contact contact)
         {

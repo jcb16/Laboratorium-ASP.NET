@@ -1,3 +1,5 @@
+using Laboratorium_3___App___Employees.Models;
+
 namespace Laboratorium_3___App___Employees
 {
     public class Program
@@ -8,6 +10,11 @@ namespace Laboratorium_3___App___Employees
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSingleton<IEmployeesService, MemoryEmployeesService>();
+
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
+
 
             var app = builder.Build();
 

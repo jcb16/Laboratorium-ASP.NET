@@ -39,10 +39,17 @@
         <span class="text-danger" asp-validation-for="Hire"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Hire">Data zwolnienia(opcjonalnie)</label>
+        <label asp-for="Fire">Data zwolnienia(opcjonalnie)</label>
         <input class="form-control" asp-for="Fire" />
         <span class="text-danger" asp-validation-for="Fire"></span>
     </div>
+
+    <div class="mb-3">
+        <label asp-for="Created">Czas utworzenia</label>
+        <input class="form-control" asp-for="Created" />
+        <span class="text-danger" asp-validation-for="Created"></span>
+    </div>
+
     <div class="mb-3">
         <button class="btn btn-primary" type="submit">Zapisz</button>
     </div>
