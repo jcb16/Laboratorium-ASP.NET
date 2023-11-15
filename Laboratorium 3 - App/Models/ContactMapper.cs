@@ -13,6 +13,7 @@ namespace Laboratorium_3___App.Models
                 Email = entity.Email,
                 Phone = entity.Phone,
                 Birth = entity.Birth,
+                OrganizationID = entity.OrganizationID,
             };
         }
 
@@ -24,6 +25,7 @@ namespace Laboratorium_3___App.Models
                 Email = model.Email,
                 Phone = model.Phone,
                 Birth = model.Birth,
+                OrganizationID = model.OrganizationID,
             };
         }
         //dane w /user/AppData/Local

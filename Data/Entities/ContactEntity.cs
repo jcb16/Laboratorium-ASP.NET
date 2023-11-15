@@ -21,5 +21,7 @@ namespace Data.Entities
         [Required]
         public string Phone { get; set; }
         public DateTime? Birth { get;set; }
+        public OrganizationEntity? Organization { get; set; }
+        public int? OrganizationID { get; set; }
     }
 }
