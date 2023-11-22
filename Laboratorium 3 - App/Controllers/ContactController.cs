@@ -1,9 +1,11 @@
 ﻿using Laboratorium_3___App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
@@ -17,6 +19,8 @@ namespace Laboratorium_3___App.Controllers
         ////lista kontaktów
         //static Dictionary<int,Contact> _contacts = new Dictionary<int,Contact>();
         //static int id = 1;
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_contactService.FindAll());
