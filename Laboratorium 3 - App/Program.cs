@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Laboratorium_3___App
 {
@@ -11,11 +13,18 @@ namespace Laboratorium_3___App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+                       
 
             // Add services to the container.
+            builder.Services.AddRazorPages();
+            builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<AppDbContext>(); //zaci¹gniecie bazy
+            builder.Services.AddDbContext<AppDbContext>(); //zaciï¿½gniecie bazy
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
             
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddTransient<IContactService, EFContactService>();
@@ -30,11 +39,18 @@ namespace Laboratorium_3___App
             }
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseAuthentication();;
 
             app.UseAuthorization();
+
+            app.UseSession();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
