@@ -40,5 +40,8 @@ namespace DataEmployees.Entities
 
         [Required]
         public DateTime Created { get; set; }
+
+        public OrganizationEntity? Organization { get; set; }
+        public int? OrganizationID { get; set; }
     }
 }

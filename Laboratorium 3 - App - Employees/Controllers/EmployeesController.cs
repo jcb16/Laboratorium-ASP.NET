@@ -1,5 +1,6 @@
 ﻿using Laboratorium_3___App___Employees.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
@@ -24,9 +25,22 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            //return View();
+            List<SelectListItem> organizations = CreateOrganizationList();
+
+            return View(new Employees() { OrganizationsList = organizations });
+
         }
 
+        private List<SelectListItem> CreateOrganizationList()
+        {
+            return _employeesService.FindAllOrganization()
+                            .Select(e => new SelectListItem()
+                            {
+                                Text = e.Name,
+                                Value = e.ID.ToString(),
+                            }).ToList();
+        }
 
 
         [HttpPost]
@@ -37,7 +51,9 @@ namespace Laboratorium_3___App.Controllers
                 _employeesService.Add(model);
                 return RedirectToAction("Index");
             }
-            return View();
+            //return View();
+            model.OrganizationsList = CreateOrganizationList();
+            return View(model);
         }
 
 

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace DataEmployees.Migrations
 {
     /// <inheritdoc />
@@ -11,6 +13,19 @@ namespace DataEmployees.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "organizations",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_organizations", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "employees",
                 columns: table => new
@@ -24,17 +39,32 @@ namespace DataEmployees.Migrations
                     Department = table.Column<string>(type: "TEXT", nullable: false),
                     Hire = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Fire = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Created = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    OrganizationID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_employees", x => x.employee_id);
+                    table.ForeignKey(
+                        name: "FK_employees_organizations_OrganizationID",
+                        column: x => x.OrganizationID,
+                        principalTable: "organizations",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.InsertData(
+                table: "organizations",
+                columns: new[] { "ID", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 101, "Uczelnia", "WSEI" },
+                    { 102, "Koło studenckie", "Koło studenckie WSEI" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_employees_OrganizationID",
                 table: "employees",
-                columns: new[] { "employee_id", "Created", "Department", "Fire", "Hire", "Name", "Pesel", "Stanowisko", "Surname" },
-                values: new object[] { 1, new DateTime(2012, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "IT", new DateTime(2015, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2012, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Adam", "11111111111", "CyberSecEngineer", "Kowalski" });
+                column: "OrganizationID");
         }
 
         /// <inheritdoc />
@@ -42,6 +72,9 @@ namespace DataEmployees.Migrations
         {
             migrationBuilder.DropTable(
                 name: "employees");
+
+            migrationBuilder.DropTable(
+                name: "organizations");
         }
     }
 }

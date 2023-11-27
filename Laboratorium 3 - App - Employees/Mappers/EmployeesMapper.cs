@@ -19,6 +19,7 @@ namespace Laboratorium_3___App___Employees.Mappers
                 Hire = entity.Hire,
                 Fire = entity.Fire,
                 Created = entity.Created,
+                OrganizationID = entity.OrganizationID,
             };
         }
 
@@ -35,6 +36,7 @@ namespace Laboratorium_3___App___Employees.Mappers
                 Hire = employees.Hire,
                 Fire = employees.Fire,
                 Created = employees.Created,
+                OrganizationID = employees.OrganizationID,
             };
         }
     }

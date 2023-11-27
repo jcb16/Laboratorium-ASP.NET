@@ -92,7 +92,7 @@ namespace Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("OrganizationEntity");
+                    b.ToTable("organizations");
 
                     b.HasData(
                         new
@@ -139,7 +139,7 @@ namespace Data.Migrations
 
                             b1.HasKey("OrganizationEntityID");
 
-                            b1.ToTable("OrganizationEntity");
+                            b1.ToTable("organizations");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationEntityID");

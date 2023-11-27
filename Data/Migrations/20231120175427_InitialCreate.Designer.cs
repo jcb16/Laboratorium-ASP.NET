@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231115134540_organization")]
-    partial class organization
+    [Migration("20231120175427_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,7 +95,7 @@ namespace Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("OrganizationEntity");
+                    b.ToTable("organizations");
 
                     b.HasData(
                         new
@@ -142,7 +142,7 @@ namespace Data.Migrations
 
                             b1.HasKey("OrganizationEntityID");
 
-                            b1.ToTable("OrganizationEntity");
+                            b1.ToTable("organizations");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationEntityID");

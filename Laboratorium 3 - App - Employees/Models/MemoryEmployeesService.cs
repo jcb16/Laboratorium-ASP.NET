@@ -1,4 +1,6 @@
-﻿namespace Laboratorium_3___App___Employees.Models
+﻿using DataEmployees.Entities;
+
+namespace Laboratorium_3___App___Employees.Models
 {
     public class MemoryEmployeesService : IEmployeesService
     {
@@ -35,6 +37,12 @@
                 _employees[employees.ID] = employees;
             }
         }
+
+        public List<OrganizationEntity> FindAllOrganization()
+        {
+            throw new NotImplementedException();
+        }
+
 
         private IDateTimeProvider _timeProvider;
 

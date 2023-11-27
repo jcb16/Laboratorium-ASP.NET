@@ -10,4 +10,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\DataEmployees\DataEmployees.csproj" />
 	</ItemGroup>
+    
+	<ItemGroup>
+	  <Folder Include="Views\Organization\" />
+	</ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace Laboratorium_3___App___Employees.Models
+﻿using DataEmployees.Entities;
+
+namespace Laboratorium_3___App___Employees.Models
 {
     public interface IEmployeesService
     {
@@ -7,5 +9,7 @@
         void Update(Employees employee);
         List<Employees> FindAll();
         Employees? FindByID(int id);
+        List<OrganizationEntity> FindAllOrganization();
+
     }
 }

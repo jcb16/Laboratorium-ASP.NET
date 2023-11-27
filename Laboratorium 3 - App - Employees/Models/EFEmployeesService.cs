@@ -1,5 +1,6 @@
 ﻿using DataEmployees;
 using Laboratorium_3___App___Employees.Mappers;
+using DataEmployees.Entities;
 
 namespace Laboratorium_3___App___Employees.Models
 {
@@ -22,6 +23,12 @@ namespace Laboratorium_3___App___Employees.Models
         public List<Employees> FindAll()
         {
             return _context.Employees.Select(e => EmployeesMapper.FromEntity(e)).ToList();
+
+        }
+
+        public List<OrganizationEntity> FindAllOrganization()
+        {
+            return _context.Organizations.ToList();
         }
 
         public Employees? FindByID(int id)
