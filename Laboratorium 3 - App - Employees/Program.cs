@@ -1,6 +1,8 @@
 using DataEmployees;
 using Laboratorium_3___App___Employees.Models;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Laboratorium_3___App___Employees
 {
@@ -9,16 +11,31 @@ namespace Laboratorium_3___App___Employees
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            //var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
 
             //builder.Services.AddSingleton<IEmployeesService, MemoryEmployeesService>();
+            
+            //builder.Services.AddDefaultIdentity<IdentityUser>();
 
-            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
+
+            builder.Services.AddRazorPages();
+            builder.Services.AddSession();
+            builder.Services.AddControllersWithViews();
+
 
             builder.Services.AddDbContext<AppDbContext>();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+            
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddTransient<IEmployeesService, EFEmployeesService>();
+
+            builder.Services.AddMemoryCache();                        
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -31,11 +48,18 @@ namespace Laboratorium_3___App___Employees
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseAuthentication();;
 
             app.UseAuthorization();
+
+            app.UseSession();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

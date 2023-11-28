@@ -1,9 +1,11 @@
 ﻿using Laboratorium_3___App___Employees.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class EmployeesController : Controller
     {
         //lista pracowników
@@ -16,7 +18,7 @@ namespace Laboratorium_3___App.Controllers
             _employeesService = employeesService;
         }
 
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_employeesService.FindAll());
