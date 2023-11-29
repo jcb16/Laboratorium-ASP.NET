@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
@@ -26,6 +26,17 @@ namespace Laboratorium_3___App.Controllers
             return View(_contactService.FindAll());
             //_contacts
         }
+
+
+        public IActionResult PagedIndex(int page = 1, int size = 5)
+        {
+            if(size < 2)
+            {
+                return BadRequest();
+            }
+            return View(_contactService.FindPage(page,size));
+        }
+
 
         [HttpGet]
         public IActionResult Create()
@@ -103,6 +114,26 @@ namespace Laboratorium_3___App.Controllers
         public IActionResult Details()
         {
             return RedirectToAction("Index");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult CreateApi()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Contact model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
     }

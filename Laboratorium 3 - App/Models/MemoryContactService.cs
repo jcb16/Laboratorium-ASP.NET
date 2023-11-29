@@ -43,6 +43,11 @@ namespace Laboratorium_3___App.Models
             throw new NotImplementedException();
         }
 
+        public PagingList<Contact> FindPage(int page, int size)
+        {
+            throw new NotImplementedException();
+        }
+
         private IDateTimeProvider _timeProvider;
 
         public MemoryContactService(IDateTimeProvider timeProvider)

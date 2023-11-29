@@ -34,6 +34,22 @@ namespace Laboratorium_3___App.Models
             return find is not null ? ContactMapper.FromEntity(find) : null;
         }
 
+        public PagingList<Contact> FindPage(int page, int size)
+        {
+            return PagingList<Contact>.Create(
+                (p,s) =>
+                    _context.Contacts
+                    .OrderBy(c => c.Name)
+                    .Skip((p -1)*s)
+                    .Take(s)
+                    .Select(ContactMapper.FromEntity)
+                    .ToList()
+                ,
+                page,
+                size,
+                _context.Contacts.Count()
+                ) ;
+        }
 
         public void RemoveById(int id)
         {
