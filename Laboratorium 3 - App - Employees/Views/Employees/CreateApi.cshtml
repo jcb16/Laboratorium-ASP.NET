@@ -30,7 +30,6 @@
     <div class="mb-3">
         <label asp-for="Department"></label>
         <select asp-for="Department" class="form-control" asp-items="@Html.GetEnumSelectList<Department>()"></select>
-
     </div>
     <div class="mb-3">
         <label asp-for="Hire"></label>
@@ -48,9 +47,14 @@
         <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
         <span class="text-danger" asp-validation-for="Priority"></span>
     </div> *@
-    
 
-    <select asp-for="OrganizationID" asp-items="@Model.OrganizationsList"></select>
+    @* <label asp-for="OrganizationID"></label>
+    <input class="form-control" type="text" id="filter" />
+    <select asp-for="OrganizationID" asp-items="@Model.OrganizationsList"></select> *@
+
+    <label asp-for="OrganizationID"></label>
+    <input class="form-control" type="text" id="filter" />
+    <select class="form-control" asp-for="OrganizationID"></select>
 
     <div class="mb-3">
         <button class="btn btn-primary" type="submit">Utwórz</button>
@@ -58,3 +62,24 @@
 
 
 </form>
+
+@section Scripts{
+    <script>
+        const select = document.getElementById('OrganizationID');
+        const filter = document.getElementById('filter');
+
+        filter.onchange = function(){
+            select.innerHTML = "";
+            fetch(`/api/organizations?q=${filter.value}`)
+            .then(response => response.json())
+            .then(organizations => {
+                for(let org of organizations){
+                    const option = document.createElement('option');
+                    option.setAttribute('value',org.id);
+                    option.innerText = org.name;
+                    select.appendChild(option);
+                }
+            });
+        }
+    </script>
+}

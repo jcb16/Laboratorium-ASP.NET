@@ -1,0 +1,92 @@
+﻿@* @model Dictionary<int, Employees> *@
+@model PagingList<Employees>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Lista pracowników</h1>
+<a class="btn btn-primary" asp-area="" asp-controller="Employees" asp-action="Create">Dodaj pracownika</a>
+<a class="btn btn-primary" asp-area="" asp-controller="Employees" asp-action="CreateApi">Dodaj kontakt API</a>
+@if (Model.Data.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Imię
+                </th>
+                <th>
+                    Nazwisko
+                </th>
+                <th>
+                    Akcje
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.Data)
+            {
+                <tr>
+                    <td class=@(item.Name.EndsWith("a") ? "text-primary":"text-secondary")>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Surname
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-action="Update" asp-route-id=@item.ID>Edycja</a>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id=@item.ID>Szczegóły</a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id=@item.ID>Usuń</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav aria-label="Employees page navigation">
+        <ul class="pagination">
+            @if (Model.IsPrevious)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Employees"
+                       asp-action="PagedIndex"
+                       asp-route-page="@(Model.Page - 1)"
+                       asp-route-size="@Model.Size">
+                        Poprzednia
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link">Poprzednia</a>
+                </li>
+            }
+            <li class="page-item disabled">
+                <a class="page-link">@Model.Page</a>
+            </li>
+            @if (Model.IsNext)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Employees"
+                       asp-action="PagedIndex"
+                       asp-route-page="@(Model.Page + 1)"
+                       asp-route-size="@Model.Size">
+                        Następna
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link">Następna</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

@@ -18,11 +18,22 @@ namespace Laboratorium_3___App.Controllers
             _employeesService = employeesService;
         }
 
+
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_employeesService.FindAll());
         }
+
+        public IActionResult PagedIndex(int page = 1, int size = 5)
+        {
+            if (size < 2)
+            {
+                return BadRequest();
+            }
+            return View(_employeesService.FindPage(page, size));
+        }
+
 
         [HttpGet]
         public IActionResult Create()
@@ -100,5 +111,25 @@ namespace Laboratorium_3___App.Controllers
         {
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult CreateApi()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Employees model)
+        {
+            if (ModelState.IsValid)
+            {
+                _employeesService.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }

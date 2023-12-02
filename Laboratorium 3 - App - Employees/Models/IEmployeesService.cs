@@ -9,6 +9,8 @@ namespace Laboratorium_3___App___Employees.Models
         void Update(Employees employee);
         List<Employees> FindAll();
         Employees? FindByID(int id);
+        PagingList<Employees> FindPage(int page, int size);
+
         List<OrganizationEntity> FindAllOrganization();
 
     }

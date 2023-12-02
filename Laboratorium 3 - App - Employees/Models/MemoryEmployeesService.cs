@@ -7,6 +7,12 @@ namespace Laboratorium_3___App___Employees.Models
         private readonly Dictionary<int, Employees> _employees = new Dictionary<int, Employees>();
         private int id = 0;
 
+        private readonly IDateTimeProvider _timeProvider;
+
+        public MemoryEmployeesService(IDateTimeProvider timeProvider)
+        {
+            _timeProvider = timeProvider;
+        }
 
         public void Add(Employees employees)
         {
@@ -44,12 +50,11 @@ namespace Laboratorium_3___App___Employees.Models
         }
 
 
-        private IDateTimeProvider _timeProvider;
-
-        public MemoryEmployeesService(IDateTimeProvider timeProvider)
+        public PagingList<Employees> FindPage(int page, int size)
         {
-            _timeProvider = timeProvider;
+            throw new NotImplementedException();
         }
+
     }
 }
 

@@ -37,6 +37,22 @@ namespace Laboratorium_3___App___Employees.Models
             return find is not null ? EmployeesMapper.FromEntity(find) : null;
         }
 
+        public PagingList<Employees> FindPage(int page, int size)
+        {
+            return PagingList<Employees>.Create(
+                (p, s) =>
+                    _context.Employees
+                    .OrderBy(c => c.Name)
+                    .Skip((p - 1) * s)
+                    .Take(s)
+                    .Select(EmployeesMapper.FromEntity)
+                    .ToList()
+                ,
+                page,
+                size,
+                _context.Employees.Count()
+                );
+        }
 
         public void RemoveById(int id)
         {
