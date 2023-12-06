@@ -9,10 +9,12 @@ namespace Laboratorium_3___App.Controllers
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
-        
+        //private readonly IDateTimeProvider _dateTimeProvider;
+
         public ContactController(IContactService contactService)
         {
             _contactService = contactService;
+            //_dateTimeProvider = CurrentDateTimeProvider;
         }
 
 
@@ -106,7 +108,12 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_contactService.FindById(id));
+            var find = _contactService.FindById(id);
+            if(find == null)
+            {
+                return NotFound();
+            }
+            return View(find);
         }
 
 
