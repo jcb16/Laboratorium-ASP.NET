@@ -6,21 +6,21 @@
 }
 
 <h1>Czy na pewno chcesz usunąć poniższego pracownika?</h1>
-<p>Imię</p>
-<h4>@Model.Name</h4>
-<p>Nazwisko</p>
-<h4>@Model.Surname</h4>
-<p>Pesel</p>
-<h4>@Model.Pesel</h4>
-<p>Stanowisko</p>
-<h4>@Model.Stanowisko</h4>
-<p>Oddział</p>
-<h4>@Model.Department</h4>
-<p>Data zatrudnienia</p>
-<h4>@Model.Hire</h4>
-<p>Data zwolnienia</p>
-<h4>@Model.Fire</h4>
-
+<h4>Imię</h4>
+<h7>@Model.Name</h7>
+<h4>Nazwisko</h4>
+<h7>@Model.Surname</h7>
+<h4>Pesel</h4>
+<h7>@Model.Pesel</h7>
+<h4>Stanowisko</h4>
+<h7>@Model.Stanowisko</h7>
+<h4>Oddział</h4>
+<h7>@Model.Department</h7>
+<h4>Data zatrudnienia</h4>
+<h7>@Model.Hire</h7>
+<h4>Data zwolnienia</h4>
+<h7>@Model.Fire</h7>
+</br>
 <form asp-action="Delete">
     <input asp-for="ID"/>
     <button class="btn btn-danger" type="submit">Tak</button>

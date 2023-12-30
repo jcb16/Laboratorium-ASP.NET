@@ -21,7 +21,7 @@ namespace Laboratorium_3___App___Employees
 
 
             builder.Services.AddRazorPages();
-            builder.Services.AddSession();
+            //builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
 
 
@@ -31,11 +31,12 @@ namespace Laboratorium_3___App___Employees
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
             
-            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddTransient<IEmployeesService, EFEmployeesService>();
 
             builder.Services.AddMemoryCache();                        
             builder.Services.AddSession();
+
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
             var app = builder.Build();
 
@@ -52,7 +53,9 @@ namespace Laboratorium_3___App___Employees
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
+            app.UseMiddleware<LastVisitCookie>();
+
             app.UseAuthentication();;
 
             app.UseAuthorization();

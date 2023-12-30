@@ -9,13 +9,16 @@ namespace Laboratorium_3___App.Controllers
     public class EmployeesController : Controller
     {
         //lista pracowników
-        
+        //private readonly IDateTimeProvider _dateTimeProvider;
+
+        private readonly IDateTimeProvider _timeProvider;
 
         private readonly IEmployeesService _employeesService;
 
-        public EmployeesController(IEmployeesService employeesService)
+        public EmployeesController(IEmployeesService employeesService, IDateTimeProvider timeProvider)
         {
             _employeesService = employeesService;
+            _timeProvider = timeProvider;
         }
 
 
@@ -35,15 +38,6 @@ namespace Laboratorium_3___App.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            //return View();
-            List<SelectListItem> organizations = CreateOrganizationList();
-
-            return View(new Employees() { OrganizationsList = organizations });
-
-        }
 
         private List<SelectListItem> CreateOrganizationList()
         {
@@ -55,6 +49,22 @@ namespace Laboratorium_3___App.Controllers
                             }).ToList();
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            //return View();
+            List<SelectListItem> organizations = CreateOrganizationList();
+
+            //return View(new Employees() { OrganizationsList = organizations });
+            var newEmployee = new Employees
+            {
+                OrganizationsList = organizations,
+                Created = _timeProvider.GetCurrentData() // Ustawianie daty utworzenia
+            };
+
+            return View(newEmployee);
+
+        }
 
         [HttpPost]
         public IActionResult Create(Employees model)
@@ -103,7 +113,13 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id) 
         {
-            return View(_employeesService.FindByID(id));
+            //return View(_employeesService.FindByID(id));
+            var find = _employeesService.FindByID(id);
+            if (find == null)
+            {
+                return NotFound();
+            }
+            return View(find);
         }
 
         [HttpPost]

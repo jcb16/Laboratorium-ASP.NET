@@ -5,9 +5,10 @@ namespace Laboratorium_3___App___Employees.Models
     public class MemoryEmployeesService : IEmployeesService
     {
         private readonly Dictionary<int, Employees> _employees = new Dictionary<int, Employees>();
-        private int id = 0;
+        //private int id = 0;
+        private int id = 1;
 
-        private readonly IDateTimeProvider _timeProvider;
+        IDateTimeProvider _timeProvider;
 
         public MemoryEmployeesService(IDateTimeProvider timeProvider)
         {
@@ -16,7 +17,7 @@ namespace Laboratorium_3___App___Employees.Models
 
         public void Add(Employees employees)
         {
-            employees.Created = _timeProvider.GetDateTime();
+            employees.Created = _timeProvider.GetCurrentData();
             employees.ID = id++;
             _employees.Add(employees.ID, employees);
         }
@@ -28,7 +29,8 @@ namespace Laboratorium_3___App___Employees.Models
 
         public Employees? FindByID(int id)
         {
-            return _employees[id];
+            //return _employees[id];
+            return _employees.ContainsKey(id) ? _employees[id] : null;
         }
 
         public void RemoveById(int id)
@@ -43,6 +45,9 @@ namespace Laboratorium_3___App___Employees.Models
                 _employees[employees.ID] = employees;
             }
         }
+        
+
+
 
         public List<OrganizationEntity> FindAllOrganization()
         {

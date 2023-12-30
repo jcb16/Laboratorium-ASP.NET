@@ -7,15 +7,21 @@ namespace Laboratorium_3___App___Employees.Models
     public class EFEmployeesService : IEmployeesService
     {
         private readonly AppDbContext _context;
+        private readonly IDateTimeProvider _timeProvider;
 
-        public EFEmployeesService(AppDbContext context)
+
+        public EFEmployeesService(AppDbContext context,IDateTimeProvider timeProvider)
         {
             _context = context;
+            _timeProvider = timeProvider;
         }
 
         public void Add(Employees employees)
         {
+            //_context.Employees.Add(EmployeesMapper.ToEntity(employees));
+            //_context.SaveChanges();
 
+            employees.Created = _timeProvider.GetCurrentData(); // Ustawienie daty utworzenia
             _context.Employees.Add(EmployeesMapper.ToEntity(employees));
             _context.SaveChanges();
         }
