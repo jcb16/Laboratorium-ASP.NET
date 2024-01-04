@@ -8,17 +8,28 @@ namespace Laboratorium_3___App.Controllers
     [Authorize(Roles = "admin")]
     public class EmployeesController : Controller
     {
-        //lista pracowników
-        //private readonly IDateTimeProvider _dateTimeProvider;
 
         private readonly IDateTimeProvider _timeProvider;
-
         private readonly IEmployeesService _employeesService;
 
-        public EmployeesController(IEmployeesService employeesService, IDateTimeProvider timeProvider)
+        //check
+        private readonly IRecentlyDeletedEmployeesService _recentlyDeletedEmployeesService;
+
+
+        //
+        public IActionResult RecentlyDeletedEmployees()
+        {
+            var recentlyDeletedEmployees = _recentlyDeletedEmployeesService.GetRecentlyDeletedEmployees();
+            return View("RecentlyDeleted", recentlyDeletedEmployees);
+        }
+        //
+
+        public EmployeesController(IEmployeesService employeesService, IDateTimeProvider timeProvider, IRecentlyDeletedEmployeesService recentlyDeletedEmployeesService)
         {
             _employeesService = employeesService;
             _timeProvider = timeProvider;
+            //check
+            _recentlyDeletedEmployeesService = recentlyDeletedEmployeesService;
         }
 
 

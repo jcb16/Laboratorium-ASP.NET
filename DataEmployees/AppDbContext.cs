@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,11 +43,30 @@ namespace DataEmployees
                 EmailConfirmed = true,
             };
 
+            //check
+            //var user2 = new IdentityUser()
+            //{
+            //    Id = Guid.NewGuid().ToString(),
+            //    UserName = "User",
+            //    NormalizedUserName = "USER",
+            //    Email = "user@wsei.edu.pl",
+            //    NormalizedEmail = "USER@WSEI.EDU.PL",
+            //    EmailConfirmed = true,
+            //};
+
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
             user.PasswordHash = passwordHasher.HashPassword(user, "1234Ab!");
 
+            //check
+            //PasswordHasher<IdentityUser> passwordHasher2 = new PasswordHasher<IdentityUser>();
+            //user2.PasswordHash = passwordHasher2.HashPassword(user2, "Start123!");
+
             modelBuilder.Entity<IdentityUser>()
                 .HasData(user);
+
+            //check
+            //modelBuilder.Entity<IdentityUser>()
+            //    .HasData(user2);
 
             //tworzenie roli
             var adminRole = new IdentityRole()
@@ -56,10 +76,21 @@ namespace DataEmployees
                 NormalizedName = "ADMIN",
             };
 
+            //check
+            //var userRole = new IdentityRole()
+            //{
+            //    Id = Guid.NewGuid().ToString(),
+            //    Name = "user",
+            //    NormalizedName = "USER",
+            //};
+
             adminRole.ConcurrencyStamp = adminRole.Id;
-
+            
+            //check
+            //userRole.ConcurrencyStamp = user.Id;
+            
+            
             //nadanie użytkownikowi roli 
-
             modelBuilder.Entity<IdentityUserRole<string>>()
                 .HasData(
                     new IdentityUserRole<string>()
@@ -72,6 +103,19 @@ namespace DataEmployees
             modelBuilder.Entity<IdentityRole>()
                 .HasData(adminRole);
 
+
+            //check
+            //modelBuilder.Entity<IdentityUserRole<string>>()
+            //   .HasData(
+            //       new IdentityUserRole<string>()
+            //       {
+            //           RoleId = userRole.Id,
+            //           UserId = user.Id,
+            //       }
+            //   );
+
+            //modelBuilder.Entity<IdentityRole>()
+            //    .HasData(adminRole);
 
             modelBuilder.Entity<EmployeesEntity>()
                 .HasOne(e => e.Organization)
