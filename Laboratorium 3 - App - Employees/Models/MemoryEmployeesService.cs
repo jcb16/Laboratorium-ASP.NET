@@ -2,7 +2,7 @@
 
 namespace Laboratorium_3___App___Employees.Models
 {
-    public class MemoryEmployeesService : IEmployeesService/*, IRecentlyDeletedEmployeesService*/
+    public class MemoryEmployeesService : IEmployeesService, IRecentlyDeletedEmployeesService
     {
         private readonly Dictionary<int, Employees> _employees = new Dictionary<int, Employees>();
         
@@ -65,37 +65,43 @@ namespace Laboratorium_3___App___Employees.Models
 
 
 
-        //public List<RecentlyDeletedEmployee> GetRecentlyDeletedEmployees()
-        //{
-        //    return _recentlyDeletedEmployees;
-        //}
+        public List<RecentlyDeletedEmployee> GetRecentlyDeletedEmployees()
+        {
+            return _recentlyDeletedEmployees;
+        }
 
-        //public void Add(RecentlyDeletedEmployee employee)
-        //{
-        //    _recentlyDeletedEmployees.Add(employee);
-        //}
+        public void Add(RecentlyDeletedEmployee employee)
+        {
+            _recentlyDeletedEmployees.Add(employee);
+        }
 
-        //public void RemoveOldDeletedEmployees(DateTime olderThan)
-        //{
-        //    _recentlyDeletedEmployees.RemoveAll(e => e.DeletedDate < olderThan);
-        //}
+        public void RemoveOldDeletedEmployees(DateTime olderThan)
+        {
+            _recentlyDeletedEmployees.RemoveAll(e => e.DeletedDate < olderThan);
+        }
 
-        //public void RestoreDeletedEmployee(int employeeId)
-        //{
-        //    var employeeToRestore = _recentlyDeletedEmployees.FirstOrDefault(e => e.ID == employeeId);
-        //    if (employeeToRestore != null)
-        //    {
-        //        _recentlyDeletedEmployees.Remove(employeeToRestore);
-        //        // Przywróć pracownika z _employees do bieżących pracowników, jeśli to konieczne
-        //    }
-        //}
+        public void RestoreDeletedEmployee(int employeeId)
+        {
+            var employeeToRestore = _recentlyDeletedEmployees.FirstOrDefault(e => e.ID == employeeId);
+            if (employeeToRestore != null)
+            {
+                _recentlyDeletedEmployees.Remove(employeeToRestore);
+                // Przywróć pracownika z _employees do bieżących pracowników, jeśli to konieczne
+            }
+        }
 
-        //public RecentlyDeletedEmployee GetDetailsOfDeletedEmployee(int employeeId)
-        //{
-        //    return _recentlyDeletedEmployees.FirstOrDefault(e => e.ID == employeeId);
-        //}
+        public RecentlyDeletedEmployee GetDetailsOfDeletedEmployee(int employeeId)
+        {
+            return _recentlyDeletedEmployees.FirstOrDefault(e => e.ID == employeeId);
+        }
 
-        //public List<RecentlyDeletedEmployee> GetDeletedEmployeesByDepartment(string departmentName)
+        public List<RecentlyDeletedEmployee> GetDeletedEmployeesByDepartment(string departmentName)
+        {
+            throw new NotImplementedException();
+        }
+        
+        //
+        //public IEnumerable<Employees> GetEmployeesByDepartment(string department)
         //{
         //    throw new NotImplementedException();
         //}

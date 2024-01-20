@@ -1,25 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Hello</h1>
+<div id="logo">
+    <p>EmployeePro</p>
     <h4>Last visit: @ViewBag.LastVisit</h4>
-    <br />
-    <h4>Jeżeli chcesz przejść do panelu administracyjnego Employees, wybierz zakładkę na pasku nawigacji</h4>
-    <h4>Lub wybierz przycisk poniżej</h4>
-    <br />
-    <a class="button-51" role="button" href="/Employees" >Employees</a>
 </div>
+<div id="buttonE">
+    <a class="button-51" role="button" href="/Employees/PagedIndex" >EmployeePro</a>
+</div>
+
+@* <div class="text-center">
+    <h1 class="display-4">Hello</h1>
+    < h4>Jeżeli chcesz przejść do panelu administracyjnego Employees, wybierz zakładkę na pasku nawigacji</h4>
+    <h4>Lub wybierz przycisk poniżej</h4> 
+    <br />
+</div> *@
 
 <style>
 .button-51 {
   background-color: transparent;
-  border: 1px solid #266DB6;
+  border: 1px solid black;
   box-sizing: border-box;
-  color: #00132C;
+  color: black;
   font-family: "Avenir Next LT W01 Bold",sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 24px;
   padding: 16px 23px;
@@ -53,8 +57,23 @@
 }
 
 .button-51:hover:before {
-  background-color: #6DCFF6;
+    background-color: lightgrey;
 }
 
+
+.text-center{
+    color: black;
+    margin-top: 150px;
+}
+
+#logo{
+    color:white;
+    font-size: 100px;
+    margin-top: 80px;
+}
+
+    #buttonE{
+        margin-top:60px;
+    }
 
 </style>

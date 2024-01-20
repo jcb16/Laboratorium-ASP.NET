@@ -77,6 +77,15 @@ namespace Laboratorium_3___App___Employees.Models
             _context.SaveChanges();
 
         }
+
+        //
+        //public IEnumerable<Employees> GetEmployeesByDepartment(string department)
+        //{
+        //    return _context.Employees
+        //        .Where(e => e.Department == department)
+        //        .Select(EmployeesMapper.FromEntity)
+        //        .ToList();
+        //}
     }
 }
 

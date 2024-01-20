@@ -10,6 +10,20 @@
 <h1>Lista pracowników</h1>
 <a class="btn btn-primary" asp-area="" asp-controller="Employees" asp-action="Create">Dodaj pracownika</a>
 <a class="btn btn-primary" asp-area="" asp-controller="Employees" asp-action="CreateApi">Dodaj kontakt API</a>
+
+<div>
+    <label for="departmentFilter">Filtruj według działu:</label>
+    <select id="departmentFilter" name="departmentFilter">
+        <option value="">Wszystkie działy</option>
+        <option value="IT">Dział IT</option>
+        <option value="Księgowość">Dział księgowości</option>
+        <option value="HR">Dział HR</option>
+        <!-- Dodaj pozostałe działy zgodnie z Twoimi potrzebami -->
+    </select>
+    <button onclick="filterEmployees()">Filtruj</button>
+</div>
+
+
 @if (Model.Data.Count() > 0)
 {
     <table class="table">
@@ -46,8 +60,9 @@
         </tbody>
     </table>
 
+
     <nav aria-label="Employees page navigation">
-        <ul class="pagination">
+        <ul class="pagination" >
             @if (Model.IsPrevious)
             {
                 <li class="page-item">
@@ -88,5 +103,41 @@
                 </li>
             }
         </ul>
-    </nav>
+    </nav> 
+
 }
+
+<style>
+    body {
+        color: white;
+    }
+
+    .form-control {
+        background-color: darkgrey;
+    }
+
+        .form-control:focus {
+            background-color: darkgrey;
+        }
+
+    
+</style>
+
+@* <script>
+    function filterEmployees() {
+        var selectedDepartment = document.getElementById("departmentFilter").value;
+
+        $.ajax({
+            url: '@Url.Action("PagedIndex")',
+            type: 'POST',
+            data: { department: selectedDepartment },
+            success: function (data) {
+                $('#employeeTableContainer').html(data);
+            },
+            error: function (error) {
+                console.error('Błąd podczas filtrowania:', error);
+            }
+        });
+    }
+</script>
+ *@

@@ -13,23 +13,23 @@ namespace Laboratorium_3___App.Controllers
         private readonly IEmployeesService _employeesService;
 
         //check
-        private readonly IRecentlyDeletedEmployeesService _recentlyDeletedEmployeesService;
+        //private readonly IRecentlyDeletedEmployeesService _recentlyDeletedEmployeesService;
 
 
         //
-        public IActionResult RecentlyDeletedEmployees()
-        {
-            var recentlyDeletedEmployees = _recentlyDeletedEmployeesService.GetRecentlyDeletedEmployees();
-            return View("RecentlyDeleted", recentlyDeletedEmployees);
-        }
+        //public IActionResult RecentlyDeletedEmployees()
+        //{
+        //    var recentlyDeletedEmployees = _recentlyDeletedEmployeesService.GetRecentlyDeletedEmployees();
+        //    return View("RecentlyDeleted", recentlyDeletedEmployees);
+        //}
         //
 
-        public EmployeesController(IEmployeesService employeesService, IDateTimeProvider timeProvider, IRecentlyDeletedEmployeesService recentlyDeletedEmployeesService)
+        public EmployeesController(IEmployeesService employeesService, IDateTimeProvider timeProvider) /*IRecentlyDeletedEmployeesService recentlyDeletedEmployeesService)*/
         {
             _employeesService = employeesService;
             _timeProvider = timeProvider;
             //check
-            _recentlyDeletedEmployeesService = recentlyDeletedEmployeesService;
+            //_recentlyDeletedEmployeesService = recentlyDeletedEmployeesService;
         }
 
 
@@ -39,13 +39,20 @@ namespace Laboratorium_3___App.Controllers
             return View(_employeesService.FindAll());
         }
 
-        public IActionResult PagedIndex(int page = 1, int size = 5)
+        public IActionResult PagedIndex(int page = 1, int size = 6, string department = "")
         {
             if (size < 2)
             {
                 return BadRequest();
             }
             return View(_employeesService.FindPage(page, size));
+
+            //var filteredData = _employeesService.GetEmployeesByDepartment(department);
+            // Dodaj kod paginacji, jeśli jest potrzebny
+
+            //return PartialView("_EmployeeTablePartial", filteredData);
+
+
         }
 
 
@@ -157,6 +164,19 @@ namespace Laboratorium_3___App.Controllers
             }
             return View();
         }
+
+
+        //[HttpPost]
+        //public IActionResult RecentlyDeleted(Employees model)
+        //{
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    _employeesService.Add(model);
+        //    //    return RedirectToAction("Index");
+        //    //}
+        //    return View();
+        //}
+
 
     }
 }

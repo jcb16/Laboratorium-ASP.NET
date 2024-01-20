@@ -14,5 +14,8 @@ namespace Laboratorium_3___App___Employees.Models
 
         List<OrganizationEntity> FindAllOrganization();
 
+        //check
+        //IEnumerable<Employees> GetEmployeesByDepartment(string department);
+
     }
 }
