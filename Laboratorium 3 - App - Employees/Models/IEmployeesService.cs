@@ -17,5 +17,7 @@ namespace Laboratorium_3___App___Employees.Models
         //check
         //IEnumerable<Employees> GetEmployeesByDepartment(string department);
 
+        void MoveToRecentlyDeleted(int employeeId);
+
     }
 }

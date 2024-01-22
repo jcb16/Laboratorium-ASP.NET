@@ -86,6 +86,17 @@ namespace Laboratorium_3___App___Employees.Models
         //        .Select(EmployeesMapper.FromEntity)
         //        .ToList();
         //}
+
+        public void MoveToRecentlyDeleted(int employeeId)
+        {
+            var employeeToMove = _context.Employees.Find(employeeId);
+
+            if (employeeToMove != null)
+            {
+                _context.Employees.Remove(employeeToMove);
+                _context.SaveChanges();
+            }
+        }
     }
 }
 

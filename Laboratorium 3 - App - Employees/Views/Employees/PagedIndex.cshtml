@@ -122,22 +122,3 @@
 
     
 </style>
-
-@* <script>
-    function filterEmployees() {
-        var selectedDepartment = document.getElementById("departmentFilter").value;
-
-        $.ajax({
-            url: '@Url.Action("PagedIndex")',
-            type: 'POST',
-            data: { department: selectedDepartment },
-            success: function (data) {
-                $('#employeeTableContainer').html(data);
-            },
-            error: function (error) {
-                console.error('Błąd podczas filtrowania:', error);
-            }
-        });
-    }
-</script>
- *@

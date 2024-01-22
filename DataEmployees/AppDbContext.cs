@@ -43,30 +43,30 @@ namespace DataEmployees
                 EmailConfirmed = true,
             };
 
-            //check
-            //var user2 = new IdentityUser()
-            //{
-            //    Id = Guid.NewGuid().ToString(),
-            //    UserName = "User",
-            //    NormalizedUserName = "USER",
-            //    Email = "user@wsei.edu.pl",
-            //    NormalizedEmail = "USER@WSEI.EDU.PL",
-            //    EmailConfirmed = true,
-            //};
+            //
+            var user2 = new IdentityUser()
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "User",
+                NormalizedUserName = "USER",
+                Email = "user@wsei.edu.pl",
+                NormalizedEmail = "USER@WSEI.EDU.PL",
+                EmailConfirmed = true,
+            };
 
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
             user.PasswordHash = passwordHasher.HashPassword(user, "1234Ab!");
 
-            //check
-            //PasswordHasher<IdentityUser> passwordHasher2 = new PasswordHasher<IdentityUser>();
-            //user2.PasswordHash = passwordHasher2.HashPassword(user2, "Start123!");
+            //
+            PasswordHasher<IdentityUser> passwordHasher2 = new PasswordHasher<IdentityUser>();
+            user2.PasswordHash = passwordHasher2.HashPassword(user2, "Start123!");
 
             modelBuilder.Entity<IdentityUser>()
                 .HasData(user);
 
-            //check
-            //modelBuilder.Entity<IdentityUser>()
-            //    .HasData(user2);
+            //
+            modelBuilder.Entity<IdentityUser>()
+                .HasData(user2);
 
             //tworzenie roli
             var adminRole = new IdentityRole()
@@ -76,18 +76,18 @@ namespace DataEmployees
                 NormalizedName = "ADMIN",
             };
 
-            //check
-            //var userRole = new IdentityRole()
-            //{
-            //    Id = Guid.NewGuid().ToString(),
-            //    Name = "user",
-            //    NormalizedName = "USER",
-            //};
+            //
+            var userRole = new IdentityRole()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "user",
+                NormalizedName = "USER",
+            };
 
             adminRole.ConcurrencyStamp = adminRole.Id;
             
-            //check
-            //userRole.ConcurrencyStamp = user.Id;
+            //
+            userRole.ConcurrencyStamp = user.Id;
             
             
             //nadanie użytkownikowi roli 
@@ -105,17 +105,17 @@ namespace DataEmployees
 
 
             //check
-            //modelBuilder.Entity<IdentityUserRole<string>>()
-            //   .HasData(
-            //       new IdentityUserRole<string>()
-            //       {
-            //           RoleId = userRole.Id,
-            //           UserId = user.Id,
-            //       }
-            //   );
+            modelBuilder.Entity<IdentityUserRole<string>>()
+               .HasData(
+                   new IdentityUserRole<string>()
+                   {
+                       RoleId = userRole.Id,
+                       UserId = user.Id,
+                   }
+               );
 
-            //modelBuilder.Entity<IdentityRole>()
-            //    .HasData(adminRole);
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(adminRole);
 
             modelBuilder.Entity<EmployeesEntity>()
                 .HasOne(e => e.Organization)

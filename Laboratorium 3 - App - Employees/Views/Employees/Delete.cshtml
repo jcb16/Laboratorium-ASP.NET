@@ -21,10 +21,14 @@
 <h4>Data zwolnienia</h4>
 <h7>@Model.Fire</h7>
 </br>
-<form asp-action="Delete">
+@* <form asp-action="Delete">
     <input asp-for="ID"/>
     <button class="btn btn-danger" type="submit">Tak</button>
+</form> *@
 
+<form asp-action="MoveToRecentlyDeleted">
+    <input asp-for="ID" />
+    <button class="btn btn-danger" type="submit">Tak</button>
 </form>
 
 <style>

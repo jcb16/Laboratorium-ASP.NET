@@ -177,6 +177,12 @@ namespace Laboratorium_3___App.Controllers
         //    return View();
         //}
 
+        [HttpPost]
+        public IActionResult MoveToRecentlyDeleted(int id)
+        {
+            _employeesService.MoveToRecentlyDeleted(id);
+            return RedirectToAction("Index");
+        }
 
     }
 }
