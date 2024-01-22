@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "ADMIN")]
     public class EmployeesController : Controller
     {
 
@@ -39,6 +39,7 @@ namespace Laboratorium_3___App.Controllers
             return View(_employeesService.FindAll());
         }
 
+        [AllowAnonymous]
         public IActionResult PagedIndex(int page = 1, int size = 6, string department = "")
         {
             if (size < 2)
@@ -51,8 +52,6 @@ namespace Laboratorium_3___App.Controllers
             // Dodaj kod paginacji, jeśli jest potrzebny
 
             //return PartialView("_EmployeeTablePartial", filteredData);
-
-
         }
 
 
@@ -124,6 +123,15 @@ namespace Laboratorium_3___App.Controllers
         [HttpPost]
         public IActionResult Delete(Employees model)
         {
+            //var employee = _employeesService.FindByID(model.ID);
+
+            //if (employee != null)
+            //{
+            //    // Oznacz pracownika jako usuniętego
+            //    employee.IsDeleted = true;
+            //    _employeesService.Update(employee);
+            //}
+
             _employeesService.RemoveById(model.ID);
             return RedirectToAction("Index");
         }
@@ -177,12 +185,7 @@ namespace Laboratorium_3___App.Controllers
         //    return View();
         //}
 
-        [HttpPost]
-        public IActionResult MoveToRecentlyDeleted(int id)
-        {
-            _employeesService.MoveToRecentlyDeleted(id);
-            return RedirectToAction("Index");
-        }
+        
 
     }
 }

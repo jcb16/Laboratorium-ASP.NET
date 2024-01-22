@@ -82,6 +82,6 @@ namespace Laboratorium_3___App___Employees.Models
 
         [ValidateNever]
         public List<SelectListItem> OrganizationsList { get; set; }
-
+        public bool IsDeleted { get; internal set; }
     }
 }

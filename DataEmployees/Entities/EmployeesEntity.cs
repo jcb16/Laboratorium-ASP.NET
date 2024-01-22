@@ -43,5 +43,6 @@ namespace DataEmployees.Entities
 
         public OrganizationEntity? Organization { get; set; }
         public int? OrganizationID { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

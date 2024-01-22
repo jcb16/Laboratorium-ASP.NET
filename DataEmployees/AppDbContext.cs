@@ -33,9 +33,18 @@ namespace DataEmployees
         {
             base.OnModelCreating(modelBuilder);
             //tworzenie użytkownika
-            var user = new IdentityUser()
+
+
+            string ADMIN_ID = Guid.NewGuid().ToString();
+            string ADMIN_ROLE_ID = Guid.NewGuid().ToString();
+
+            string USER_ROLE_ID = Guid.NewGuid().ToString();
+            string USER_ID = Guid.NewGuid().ToString();
+
+
+            var admin = new IdentityUser()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = ADMIN_ID,
                 UserName = "Test",
                 NormalizedUserName = "TEST",
                 Email = "test@wsei.edu.pl",
@@ -44,9 +53,9 @@ namespace DataEmployees
             };
 
             //
-            var user2 = new IdentityUser()
+            var user = new IdentityUser()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = USER_ID,
                 UserName = "User",
                 NormalizedUserName = "USER",
                 Email = "user@wsei.edu.pl",
@@ -55,67 +64,45 @@ namespace DataEmployees
             };
 
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
-            user.PasswordHash = passwordHasher.HashPassword(user, "1234Ab!");
+            admin.PasswordHash = passwordHasher.HashPassword(admin, "1234Ab!");
 
             //
             PasswordHasher<IdentityUser> passwordHasher2 = new PasswordHasher<IdentityUser>();
-            user2.PasswordHash = passwordHasher2.HashPassword(user2, "Start123!");
+            user.PasswordHash = passwordHasher2.HashPassword(user, "Start123!");
 
-            modelBuilder.Entity<IdentityUser>()
-                .HasData(user);
 
-            //
-            modelBuilder.Entity<IdentityUser>()
-                .HasData(user2);
 
             //tworzenie roli
-            var adminRole = new IdentityRole()
+            var adminRole = new IdentityRole
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = "admin",
+                Name = "ADMIN",
                 NormalizedName = "ADMIN",
+                Id = ADMIN_ROLE_ID,
+                ConcurrencyStamp = ADMIN_ROLE_ID
             };
 
-            //
-            var userRole = new IdentityRole()
+
+
+            var userRole = new IdentityRole
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = "user",
+                Name = "USER",
                 NormalizedName = "USER",
+                Id = USER_ROLE_ID,
+                ConcurrencyStamp = USER_ROLE_ID
             };
 
-            adminRole.ConcurrencyStamp = adminRole.Id;
-            
-            //
-            userRole.ConcurrencyStamp = user.Id;
-            
-            
-            //nadanie użytkownikowi roli 
-            modelBuilder.Entity<IdentityUserRole<string>>()
-                .HasData(
-                    new IdentityUserRole<string>()
-                    {
-                        RoleId = adminRole.Id,
-                        UserId = user.Id,
-                    }
-                );
-
-            modelBuilder.Entity<IdentityRole>()
-                .HasData(adminRole);
 
 
-            //check
-            modelBuilder.Entity<IdentityUserRole<string>>()
-               .HasData(
-                   new IdentityUserRole<string>()
-                   {
-                       RoleId = userRole.Id,
-                       UserId = user.Id,
-                   }
-               );
+            modelBuilder.Entity<IdentityUser>().HasData(user, admin);
+            modelBuilder.Entity<IdentityRole>().HasData(adminRole, userRole);
 
-            modelBuilder.Entity<IdentityRole>()
-                .HasData(adminRole);
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string> { RoleId = ADMIN_ROLE_ID, UserId = ADMIN_ID },
+                new IdentityUserRole<string> { RoleId = USER_ROLE_ID, UserId = USER_ID }
+
+            );
+
+
 
             modelBuilder.Entity<EmployeesEntity>()
                 .HasOne(e => e.Organization)
@@ -160,4 +147,4 @@ namespace DataEmployees
 
         }
     }
-}
+}   

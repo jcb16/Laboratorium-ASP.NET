@@ -65,69 +65,12 @@ namespace Laboratorium_3___App___Employees.Models
 
 
 
-        //public List<RecentlyDeletedEmployee> GetRecentlyDeletedEmployees()
-        //{
-        //    return _recentlyDeletedEmployees;
-        //}
+        private List<Employees> _activeEmployees = new List<Employees>();
+        private List<Employees> _recentlyDeletedEmployees = new List<Employees>();
 
-        //public void Add(RecentlyDeletedEmployee employee)
-        //{
-        //    _recentlyDeletedEmployees.Add(employee);
-        //}
+        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        //public void RemoveOldDeletedEmployees(DateTime olderThan)
-        //{
-        //    _recentlyDeletedEmployees.RemoveAll(e => e.DeletedDate < olderThan);
-        //}
-
-        //public void RestoreDeletedEmployee(int employeeId)
-        //{
-        //    var employeeToRestore = _recentlyDeletedEmployees.FirstOrDefault(e => e.ID == employeeId);
-        //    if (employeeToRestore != null)
-        //    {
-        //        _recentlyDeletedEmployees.Remove(employeeToRestore);
-        //        // Przywróć pracownika z _employees do bieżących pracowników, jeśli to konieczne
-        //    }
-        //}
-
-        //public RecentlyDeletedEmployee GetDetailsOfDeletedEmployee(int employeeId)
-        //{
-        //    return _recentlyDeletedEmployees.FirstOrDefault(e => e.ID == employeeId);
-        //}
-
-        //public List<RecentlyDeletedEmployee> GetDeletedEmployeesByDepartment(string departmentName)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //
-        //public IEnumerable<Employees> GetEmployeesByDepartment(string department)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public void MoveToRecentlyDeleted(int employeeId)
-        {
-            var employeeToMove = _activeEmployees.FirstOrDefault(e => e.ID == employeeId);
-
-            if (employeeToMove != null)
-            {
-                // Stworzenie kopii pracownika
-                var clonedEmployee = new Employees
-                {
-                    ID = employeeToMove.ID,
-                    Name = employeeToMove.Name,
-                    Surname = employeeToMove.Surname,
-                    // Kopia innych właściwości pracownika
-                };
-
-                // Dodanie pracownika do listy recently deleted
-                _recentlyDeletedEmployees.Add(clonedEmployee);
-
-                // Usunięcie pracownika z listy aktywnych
-                _activeEmployees.Remove(employeeToMove);
-            }
-        }
+        
     }
 }
 

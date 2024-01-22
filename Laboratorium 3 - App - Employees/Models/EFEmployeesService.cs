@@ -9,6 +9,7 @@ namespace Laboratorium_3___App___Employees.Models
         private readonly AppDbContext _context;
         private readonly IDateTimeProvider _timeProvider;
 
+        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public EFEmployeesService(AppDbContext context,IDateTimeProvider timeProvider)
         {
@@ -28,8 +29,11 @@ namespace Laboratorium_3___App___Employees.Models
 
         public List<Employees> FindAll()
         {
+            //return _context.Employees
+            //.Where(e => !e.IsDeleted)
+            //.Select(e => EmployeesMapper.FromEntity(e))
+            //.ToList();
             return _context.Employees.Select(e => EmployeesMapper.FromEntity(e)).ToList();
-
         }
 
         public List<OrganizationEntity> FindAllOrganization()
@@ -87,16 +91,16 @@ namespace Laboratorium_3___App___Employees.Models
         //        .ToList();
         //}
 
-        public void MoveToRecentlyDeleted(int employeeId)
-        {
-            var employeeToMove = _context.Employees.Find(employeeId);
+        //public void MoveToRecentlyDeleted(int employeeId)
+        //{
+        //    var employeeToMove = _context.Employees.Find(employeeId);
 
-            if (employeeToMove != null)
-            {
-                _context.Employees.Remove(employeeToMove);
-                _context.SaveChanges();
-            }
-        }
+        //    if (employeeToMove != null)
+        //    {
+        //        _context.Employees.Remove(employeeToMove);
+        //        _context.SaveChanges();
+        //    }
+        //}
     }
 }
 
